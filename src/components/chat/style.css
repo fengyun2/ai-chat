@@ -1,0 +1,10 @@
+.quick-replies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.quick-reply-btn {
+  margin-bottom: 8px;
+}

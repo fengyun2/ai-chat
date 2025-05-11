@@ -4,9 +4,35 @@ import Chat, { Bubble, useMessages, Button, toast, Form, FormItem, FormActions, 
 // 引入样式
 import '@chatui/core/dist/index.css';
 import { useState } from 'react';
+import './style.css';
+
+// 初始化消息列表，添加欢迎语和常见问题
+const initialMessages = [
+  {
+    type: 'text',
+    content: { text: '您好，我是智能客服助手，很高兴为您服务！有什么可以帮助您的吗？' },
+    position: 'left',
+  },
+  {
+    type: 'text',
+    content: { text: '以下是常见问题，您可以点击或直接提问：' },
+    position: 'left',
+  },
+  {
+    type: 'quick-replies',
+    content: {
+      items: [
+        { name: '如何退换商品？', text: '如何退换商品？' },
+        { name: '物流配送时间', text: '物流配送时间' },
+        { name: '支付方式有哪些？', text: '支付方式有哪些？' },
+        { name: '如何修改订单？', text: '如何修改订单？' }
+      ]
+    }
+  }
+];
 
 const App = () => {
-  const { messages, appendMsg } = useMessages([]);
+  const { messages, appendMsg } = useMessages(initialMessages);
   const [username, setUsername] = useState('')
   const [sex, setSex] = useState('')
 
@@ -105,6 +131,11 @@ const App = () => {
     toast.info('已取消');
   }
 
+  // 处理快速回复点击
+  function handleQuickReplyClick(item) {
+    handleSend('text', item.text);
+  }
+
   function renderMessageContent(msg) {
     const { type, content } = msg;
 
@@ -163,7 +194,24 @@ const App = () => {
             </div>
           </Bubble>
         );
-      
+    
+        case 'quick-replies':
+          return (
+            <div className="quick-replies">
+              {content.items.map((item, i) => (
+                <Button 
+                  key={i}
+                  onClick={() => handleQuickReplyClick(item)}
+                  className="quick-reply-btn"
+                  color="primary"
+                  size="sm"
+                >
+                  {item.text}
+                </Button>
+              ))}
+            </div>
+          );
+
       default:
         return <Bubble content="不支持的消息类型" />;
     }
