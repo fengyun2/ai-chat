@@ -1,11 +1,14 @@
 // 目前 @chatui/core toast 组件不兼容 react 19 版本，暂时降低版本为 react 18
 // 引入组件
-import Chat, { Bubble, useMessages, Button, toast } from '@chatui/core';
+import Chat, { Bubble, useMessages, Button, toast, Form, FormItem, FormActions, Input, RadioGroup } from '@chatui/core';
 // 引入样式
 import '@chatui/core/dist/index.css';
+import { useState } from 'react';
 
 const App = () => {
   const { messages, appendMsg } = useMessages([]);
+  const [username, setUsername] = useState('')
+  const [sex, setSex] = useState('')
 
   function handleSend(type, val) {
     if (type === 'text' && val.trim()) {
@@ -38,12 +41,68 @@ const App = () => {
             }
           });
         }, 1000);
+
+        // Form 表单消息
+        setTimeout(() => {
+          appendMsg({
+            type: 'form',
+            content: {
+              form: {
+                title: '用户信息',
+                fields: [
+                  {
+                    name: 'username',
+                    label: '姓名',
+                    type: 'text',
+                    required: true
+                  },
+                  {
+                    name: 'sex',
+                    label: '性别',
+                    type: 'radio-group',
+                    options: [
+                      { label: '男', value: 'male' },
+                      { label: '女', value: 'female' }
+                    ],
+                  }
+                ]
+              }
+            }
+          })
+        }, 1000)
       }, 1000);
     }
   }
 
   function buyNow() {
     toast.success('购买成功');
+  }
+
+  // 添加表单提交处理函数
+  function handleFormSubmit(e) {
+    if (e) e.preventDefault();
+    if (!username) {
+      toast.error('请输入姓名');
+      return;
+    }
+    toast.success('提交成功');
+    // 这里可以添加表单提交后的处理逻辑
+    appendMsg({
+      type: 'text',
+      content: { text: `表单提交成功！姓名：${username}，性别：${sex}` },
+      position: 'left',
+    });
+
+    // 清空表单
+    setUsername('');
+    setSex('');
+  }
+
+  // 添加表单取消处理函数
+  function handleFormCancel() {
+    setUsername('');
+    setSex('');
+    toast.info('已取消');
   }
 
   function renderMessageContent(msg) {
@@ -68,6 +127,39 @@ const App = () => {
               <p>价格：{content.json.price}</p>
               <p>{content.json.description}</p>
               <Button color='primary' onClick={buyNow}>立即购买</Button>
+            </div>
+          </Bubble>
+        );
+
+      case 'form':
+        return (
+          <Bubble>
+            <div style={{ padding: '8px' }}>
+              {content.form.title && <h4>{content.form.title}</h4>}
+              <Form onSubmit={handleFormSubmit}>
+                {content.form.fields.map((field) => (
+                  <FormItem key={field.name} label={field.label} required={field.required}>
+                    {field.type === 'text' && (
+                      <Input 
+                        value={field.name === 'username' ? username : field.name === 'sex' ? sex : ''} 
+                        placeholder={`请输入${field.label}`} 
+                        onChange={field.name === 'username' ? setUsername : field.name === 'sex' ? setSex : () => {}}
+                      />
+                    )}
+                    {field.type === 'radio-group' && (
+                      <RadioGroup 
+                        value={field.name === 'sex' ? sex : ''} 
+                        onChange={field.name === 'sex' ? setSex : () => {}}
+                        options={field.options || []}
+                      />
+                    )}
+                  </FormItem>
+                ))}
+                <FormActions>
+                  <Button type="submit" color='primary'>提交</Button>
+                  <Button onClick={handleFormCancel}>取消</Button>
+                </FormActions>
+              </Form>
             </div>
           </Bubble>
         );
