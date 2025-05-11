@@ -1,3 +1,4 @@
+// 目前 @chatui/core toast 组件不兼容 react 19 版本，暂时降低版本为 react 18
 // 引入组件
 import Chat, { Bubble, useMessages, Button, toast } from '@chatui/core';
 // 引入样式
@@ -41,6 +42,10 @@ const App = () => {
     }
   }
 
+  function buyNow() {
+    toast.success('购买成功');
+  }
+
   function renderMessageContent(msg) {
     const { type, content } = msg;
 
@@ -62,9 +67,7 @@ const App = () => {
               <h4>{content.json.title}</h4>
               <p>价格：{content.json.price}</p>
               <p>{content.json.description}</p>
-              <Button color='primary' onClick={() => {
-                toast.success('购买成功');
-              }}>立即购买</Button>
+              <Button color='primary' onClick={buyNow}>立即购买</Button>
             </div>
           </Bubble>
         );
@@ -75,12 +78,14 @@ const App = () => {
   }
 
   return (
+    <>
     <Chat
       navbar={{ title: '智能助理' }}
       messages={messages}
       renderMessageContent={renderMessageContent}
       onSend={handleSend}
     />
+    </>
   );
 };
 
