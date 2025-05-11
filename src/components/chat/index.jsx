@@ -172,7 +172,16 @@ const App = () => {
   return (
     <>
     <Chat
-      navbar={{ title: '智能助理' }}
+      isX
+      navbar={{ 
+        title: '智能助理', 
+        leftContent: {
+          icon: 'close',
+          onClick: () => {
+            console.log('点击了关闭按钮');
+          }
+        } 
+      }}
       messages={messages}
       renderMessageContent={renderMessageContent}
       onSend={handleSend}
