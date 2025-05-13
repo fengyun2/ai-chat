@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import ChatComp from './components/chat/index.jsx';
+// 导入setIframeDocument函数
+import { setIframeDocument } from './components/chat/utils/mountComponent';
 
 // 创建iframe并初始化聊天组件
 function initialize(containerId, options = {}) {
@@ -55,6 +57,9 @@ function initialize(containerId, options = {}) {
   
   // 获取iframe的document
   const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+  
+  // 设置iframe的document对象，以便mountComponent可以使用
+  setIframeDocument(iframeDoc);
   
   // 写入基本HTML结构
   iframeDoc.open();

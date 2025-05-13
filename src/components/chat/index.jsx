@@ -1,9 +1,10 @@
 // 目前 @chatui/core toast 组件不兼容 react 19 版本，暂时降低版本为 react 18
 // 引入组件
-import Chat, { Bubble, useMessages, Button, toast, Form, FormItem, FormActions, Input, RadioGroup } from '@chatui/core';
+import Chat, { Bubble, useMessages, Button, Form, FormItem, FormActions, Input, RadioGroup } from '@chatui/core';
 // 引入样式
 import '@chatui/core/dist/index.css';
 import { useState } from 'react';
+import { toast } from './utils/toast'
 import './style.css';
 
 // 初始化消息列表，添加欢迎语和常见问题
@@ -111,7 +112,7 @@ const App = () => {
       toast.error('请输入姓名');
       return;
     }
-    toast.success('提交成功');
+    toast.success('提交成功', 60000);
     // 这里可以添加表单提交后的处理逻辑
     appendMsg({
       type: 'text',
