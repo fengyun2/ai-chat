@@ -203,7 +203,6 @@ const App = () => {
       return (
         <div className="message-wrapper">
           {children}
-          {status && status !== "sent" && (<p>xxxxx</p>)}
           {status && status !== "sent" && (
             <MessageStatus status={status} onClick={() => handleResend(msg)} />
           )}
