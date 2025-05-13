@@ -3,6 +3,18 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "main": "./dist/ai-chat.umd.js",
+  "module": "./dist/ai-chat.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/ai-chat.es.js",
+      "require": "./dist/ai-chat.umd.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
