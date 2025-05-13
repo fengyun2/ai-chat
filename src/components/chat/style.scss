@@ -1,3 +1,5 @@
+@import url("../../assets/iconfont.css");
+
 // 覆盖样式
 :root {
   --navbar-bg: rgba(0, 0, 0, 0.88);
@@ -46,4 +48,52 @@
 
 .quick-reply-btn {
   margin-bottom: 8px;
+}
+
+// 自定义导航栏样式
+.custom-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.88);
+  color: #fff;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 16px 16px 0 0;
+  position: relative;
+  
+  .navbar-title {
+    font-family: Gilroy, Montserrat, avenir, Helvetica Neue, Helvetica, Arial, sans-serif, Microsoft YaHei UI;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: left;
+    flex: 1;
+  }
+  
+  .navbar-actions {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 16px;
+    
+    .navbar-btn {
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      padding: 4px;
+      margin-left: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      &:hover {
+        opacity: 0.8;
+      }
+      
+      i {
+        font-size: 18px;
+      }
+    }
+  }
 }

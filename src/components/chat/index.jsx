@@ -192,6 +192,26 @@ const App = () => {
     handleSend("text", item.text);
   }
 
+  function renderNavbar() {
+    return (
+      <div className="custom-navbar">
+            <div className="navbar-title">XPPEN智能客服</div>
+            <div className="navbar-actions">
+              <button className="navbar-btn navbar-btn-expand" onClick={() => {
+                console.log("点击了全屏按钮");
+              }}>
+                <i className="iconfont icon-arrows-maximize"></i>
+              </button>
+              <button className="navbar-btn" onClick={() => {
+                console.log("点击了关闭按钮");
+              }}>
+                <i className="iconfont icon-chevrons-down"></i>
+              </button>
+            </div>
+          </div>
+    )
+  }
+
   function renderMessageContent(msg) {
     const { type, content, status } = msg;
 
@@ -318,15 +338,16 @@ const App = () => {
     <>
       <Chat
         isX
-        navbar={{
-          title: "XPPEN智能客服",
-          leftContent: {
-            icon: "close",
-            onClick: () => {
-              console.log("点击了关闭按钮");
-            },
-          },
-        }}
+        // navbar={{
+        //   title: "XPPEN智能客服",
+        //   leftContent: {
+        //     icon: "close",
+        //     onClick: () => {
+        //       console.log("点击了关闭按钮");
+        //     },
+        //   },
+        // }}
+        renderNavbar={renderNavbar}
         messages={messages}
         renderMessageContent={renderMessageContent}
         onSend={handleSend}
