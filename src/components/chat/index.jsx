@@ -49,7 +49,6 @@ const App = () => {
   const [username, setUsername] = useState("");
   const [sex, setSex] = useState("");
   const typingMsgId = useRef("");
-  const [forceUpdate, setForceUpdate] = useState(0);
 
   function handleSend(type, val) {
     // 生成唯一ID用于标识消息
@@ -90,8 +89,6 @@ const App = () => {
 
         // 模拟回答结束
         typingMsgId.current = '';
-        // 强制组件重新渲染
-        setForceUpdate(prev => prev + 1);
 
         // HTML 格式消息
         // appendMsg({
@@ -202,10 +199,10 @@ const App = () => {
     const MessageWrapper = ({ children }) => {
       return (
         <div className="message-wrapper">
-          {children}
           {status && status !== "sent" && (
             <MessageStatus status={status} onClick={() => handleResend(msg)} />
           )}
+          {children}
         </div>
       );
     };

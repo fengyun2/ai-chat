@@ -27,6 +27,10 @@
     .MessageList {
       padding: 16px;
     }
+    .message-wrapper {
+      display: flex;
+      align-items: center;
+    }
     .ChatFooter {
       border-radius: 0 0 16px 16px;
     }
