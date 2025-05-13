@@ -15,6 +15,7 @@ import Chat, {
 import "@chatui/core/dist/index.css";
 import { useState, useRef } from "react";
 import { toast } from "./utils/toast";
+import { toggleAiChat } from "./utils/mountComponent";
 import "./style.scss";
 
 // 初始化消息列表，添加欢迎语和常见问题
@@ -88,7 +89,7 @@ const App = () => {
         }
 
         // 模拟回答结束
-        typingMsgId.current = '';
+        typingMsgId.current = "";
 
         // HTML 格式消息
         // appendMsg({
@@ -195,21 +196,28 @@ const App = () => {
   function renderNavbar() {
     return (
       <div className="custom-navbar">
-            <div className="navbar-title">XPPEN智能客服</div>
-            <div className="navbar-actions">
-              <button className="navbar-btn navbar-btn-expand" onClick={() => {
-                console.log("点击了全屏按钮");
-              }}>
-                <i className="iconfont icon-arrows-maximize"></i>
-              </button>
-              <button className="navbar-btn" onClick={() => {
-                console.log("点击了关闭按钮");
-              }}>
-                <i className="iconfont icon-chevrons-down"></i>
-              </button>
-            </div>
-          </div>
-    )
+        <div className="navbar-title">XPPEN智能客服</div>
+        <div className="navbar-actions">
+          <button
+            className="navbar-btn navbar-btn-expand"
+            onClick={() => {
+              console.log("点击了全屏按钮");
+            }}
+          >
+            <i className="iconfont icon-arrows-maximize"></i>
+          </button>
+          <button
+            className="navbar-btn"
+            onClick={() => {
+              console.log("点击了关闭按钮");
+              toggleAiChat();
+            }}
+          >
+            <i className="iconfont icon-chevrons-down"></i>
+          </button>
+        </div>
+      </div>
+    );
   }
 
   function renderMessageContent(msg) {
