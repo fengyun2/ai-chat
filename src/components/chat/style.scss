@@ -1,0 +1,45 @@
+// 覆盖样式
+:root {
+  --navbar-bg: rgba(0, 0, 0, 0.88);
+}
+
+#ai-chat-root {
+  // background: #e8e9ed;
+  // box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);
+  // border-radius: 16px;
+  .ChatApp {
+    border-radius: 0 0 16px 16px;
+    .Navbar {
+      border-radius: 16px 16px 0 0;
+      .IconBtn {
+        color: #fff;
+      }
+      .Navbar-title {
+        color: #fff;
+      }
+      .Navbar-desc {
+        color: #fff;
+      }
+      .Navbar-right {
+        
+      }
+    }
+    .MessageList {
+      padding: 16px;
+    }
+    .ChatFooter {
+      border-radius: 0 0 16px 16px;
+    }
+  }
+}
+
+.quick-replies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.quick-reply-btn {
+  margin-bottom: 8px;
+}

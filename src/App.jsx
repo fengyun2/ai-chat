@@ -1,4 +1,3 @@
-import './App.css'
 import ChatComp from './components/chat/index.jsx'
 
 function App() {

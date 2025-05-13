@@ -6,7 +6,7 @@ import { setIframeDocument } from './components/chat/utils/mountComponent';
 
 // 创建iframe并初始化聊天组件
 function initialize(containerId, options = {}) {
-  const { width = '350px', height = '520px' } = options;
+  const { width = '300px', height = '520px' } = options;
   const container = document.getElementById(containerId);
   if (!container) {
     console.error(`容器元素 #${containerId} 未找到`);
@@ -28,18 +28,18 @@ function initialize(containerId, options = {}) {
     inset: auto 20px 98px auto !important;
     position: fixed !important;
     border: 0px !important;
-    min-height: 520px !important;
-    min-width: 350px !important;
-    max-height: 520px !important;
-    max-width: 350px !important;
+    min-height: ${height} !important;
+    min-width: ${width} !important;
+    max-height: ${height} !important;
+    max-width: ${width} !important;
     padding: 0px !important;
     margin: 0px !important;
     transition-property: none !important;
     transform: none !important;
-    width: 350px !important;
-    height: 520px !important;
+    width: ${width} !important;
+    height: ${height} !important;
     display: block !important;
-    z-index: 1000002 !important;
+    z-index: 999 !important;
     cursor: auto !important;
     float: none !important;
     border-radius: 18px !important;
@@ -57,7 +57,7 @@ function initialize(containerId, options = {}) {
   
   // 获取iframe的document
   const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-  
+
   // 设置iframe的document对象，以便mountComponent可以使用
   setIframeDocument(iframeDoc);
   
