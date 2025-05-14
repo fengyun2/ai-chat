@@ -8,6 +8,8 @@ import {
   setIconIframe
 } from "./components/chat/utils/mountComponent";
 
+import iconService from './assets/img/icon-service.png';
+
 /**
  * 创建iframe并初始化聊天组件
  * @param {*} containerId
@@ -28,7 +30,7 @@ function initialize(containerId, options = {}) {
     width = "300px",
     height = "520px",
     iconSize = "24px",
-    iconContainerSize = "38px",
+    iconContainerSize = "48px",
   } = options;
   const container = document.getElementById(containerId);
   if (!container) {
@@ -99,29 +101,25 @@ function initialize(containerId, options = {}) {
           overflow: hidden;
         }
         
-        body:hover {
-          transform: scale(1.1);
-        }
-        
         .ai-chat-icon-inner {
           width: 100%;
           height: 100%;
           display: flex;
           align-items: center;
           justify-content: center;
-          background: #999;
-          border-radius: 50%;
           cursor: pointer;
         }
         
-        .ai-chat-icon-inner i {
-          font-size: ${iconSize};
+        .ai-chat-icon-inner img {
+          width: ${iconContainerSize} !important;
+          height: ${iconContainerSize} !important;
+          object-fit: contain !important;
         }
       </style>
     </head>
     <body>
       <div class="ai-chat-icon-inner">
-        <i class="iconfont icon-service"></i>
+        <img src="${options.iconSrc || iconService}" alt="AI Chat Icon" />
       </div>
     </body>
     </html>
@@ -269,11 +267,11 @@ function initialize(containerId, options = {}) {
       // 添加打开动画
       rootDiv.classList.add("open");
       // 更改图标样式（可选）
-      iconIframe.contentWindow.document.body.style.transform = "scale(0.9)";
+      // iconIframe.contentWindow.document.body.style.transform = "scale(0.9)";
     } else {
       chatIframe.style.visibility = "hidden";
       rootDiv.classList.remove("open");
-      iconIframe.contentWindow.document.body.style.transform = "scale(1)";
+      // iconIframe.contentWindow.document.body.style.transform = "scale(1)";
     }
   });
 
