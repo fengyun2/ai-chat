@@ -1,9 +1,18 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { libInjectCss } from 'vite-plugin-lib-inject-css'
 
+const isDev = process.env.NODE_ENV === 'development'
+
+const plugins = isDev ? [
+  react(),
+  libInjectCss()
+] : [
+  react(),
+]
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: plugins,
   build: {
     lib: {
       entry: 'src/lib.jsx', // 我们将创建这个入口文件
@@ -17,7 +26,8 @@ export default defineConfig({
         // 在UMD构建模式下为这些外部化的依赖提供一个全局变量
         globals: {}
       }
-    }
+    },
+    // cssCodeSplit: false
   },
   define: {
     'process.env': JSON.stringify({}),

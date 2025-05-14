@@ -9,6 +9,7 @@ import {
 } from "./components/chat/utils/mountComponent";
 
 import iconService from './assets/img/icon-service.png';
+import './components/chat/style.scss';
 
 /**
  * 创建iframe并初始化聊天组件
@@ -29,7 +30,7 @@ function initialize(containerId, options = {}) {
   const {
     width = "300px",
     height = "520px",
-    iconSize = "24px",
+    // iconSize = "24px",
     iconContainerSize = "48px",
   } = options;
   const container = document.getElementById(containerId);
