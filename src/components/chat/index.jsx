@@ -1,6 +1,6 @@
 // 目前 @chatui/core toast 组件不兼容 react 19 版本，暂时降低版本为 react 18
 // 引入组件
-import Chat, {
+import {
   Bubble,
   useMessages,
   Button,
@@ -15,6 +15,7 @@ import Chat, {
 import "@chatui/core/dist/index.css";
 import { useState, useRef } from "react";
 import { toast } from "./utils/toast";
+import { Chat } from './components/Chat'
 import { toggleAiChat } from "./utils/mountComponent";
 import "./style.scss";
 
@@ -359,6 +360,7 @@ const App = () => {
         messages={messages}
         renderMessageContent={renderMessageContent}
         onSend={handleSend}
+        rightAction={{iconClassName: 'icon-send'}}
       />
     </>
   );

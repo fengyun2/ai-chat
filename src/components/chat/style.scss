@@ -3,12 +3,10 @@
 // 覆盖样式
 :root {
   --navbar-bg: rgba(0, 0, 0, 0.88);
+  --action-size: 32px;
 }
 
 #ai-chat-root {
-  // background: #e8e9ed;
-  // box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);
-  // border-radius: 16px;
   .ChatApp {
     border-radius: 0 0 16px 16px;
     .Navbar {
@@ -35,6 +33,37 @@
     }
     .ChatFooter {
       border-radius: 0 0 16px 16px;
+    }
+
+    .Composer-actions {
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      width: var(--action-size);
+      height: var(--action-size);
+      transition: none;
+    
+      &[data-action='send'] {
+        width: var(--action-size);
+        height: var(--action-size);
+      }
+      .IconBtn {
+        padding: 8Px;
+        background: rgba(0,0,0,0.8);
+        font-size: var(--action-font-size);
+        color: #fff;
+        border-radius: 8px;
+        i {
+          line-height: 1;
+        }
+      }
+      .Composer-sendBtn {
+        background: rgba(0,0,0,0.8);
+      }
+    }
+    
+    .Composer[data-has-value=true] .Composer-sendBtn {
+      animation: none;
     }
   }
 }

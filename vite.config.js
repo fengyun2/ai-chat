@@ -28,5 +28,8 @@ export default defineConfig({
         NODE_ENV: 'production'
       }
     })
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json']
   }
 })
