@@ -9,7 +9,25 @@ import {
 } from "./components/chat/utils/mountComponent";
 
 import iconService from './assets/img/icon-service.png';
-import './components/chat/style.scss';
+// import './components/chat/style.scss';
+
+const isDev = process.env.NODE_ENV === "development";
+let styles = ''
+if (isDev) {
+  styles = Array.from(document.styleSheets)
+    .filter(styleSheet => !styleSheet.href || styleSheet.href.startsWith(window.location.origin))
+    .map(styleSheet => {
+      try {
+        return Array.from(styleSheet.cssRules)
+          .map(rule => rule.cssText)
+          .join('\n');
+      } catch (e) {
+        console.warn('无法读取样式表', e);
+        return '';
+      }
+    })
+    .join('\n');
+}
 
 /**
  * 创建iframe并初始化聊天组件
@@ -129,7 +147,7 @@ function initialize(containerId, options = {}) {
   // 创建样式链接
   const linkElement = iconDoc.createElement("link");
   linkElement.rel = "stylesheet";
-  linkElement.href = options.cssPath || "../dist/ai-chat.css";
+  linkElement.href = options.cssPath || "./ai-chat.css";
   iconDoc.head.appendChild(linkElement);
 
   // 创建聊天iframe元素
@@ -226,6 +244,9 @@ function initialize(containerId, options = {}) {
           vertical-align: middle;
         }
       </style>
+      <style>
+        ${styles}
+      </style>
     </head>
     <body>
       <div id="ai-chat-root" class="open"></div>
@@ -237,7 +258,7 @@ function initialize(containerId, options = {}) {
   // 创建样式链接
   const chatDocLinkElement = chatDoc.createElement("link");
   chatDocLinkElement.rel = "stylesheet";
-  chatDocLinkElement.href = options.cssPath || "../dist/ai-chat.css";
+  chatDocLinkElement.href = options.cssPath || "./ai-chat.css";
   chatDoc.head.appendChild(chatDocLinkElement);
 
   // 添加图标库
