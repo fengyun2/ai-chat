@@ -63,7 +63,7 @@ export function mountComponent(Comp, root) {
  * 切换聊天窗口
  */
 export function toggleAiChat() {
-  if(iconIframe) {
+  if (iconIframe) {
     iconIframe.contentWindow.document.body.click();
   }
 }

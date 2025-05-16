@@ -1,43 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover" />
-  <title>AI聊天插件示例</title>
-</head>
-<body>
-  <!-- <h1>AI聊天插件示例</h1> -->
-  <div id="root"></div>
-  <!-- <script type="module" src="/src/lib.jsx"></script> -->
-  
-  <script>
-    // 等待DOM加载完成
-    document.addEventListener('DOMContentLoaded', function() {
-      // 添加调试代码
-      console.log('AiChat对象:', AiChat);
-      
-      // 检查AiChat对象是否正确加载
-      if (typeof AiChat === 'undefined') {
-        console.error('AiChat对象未定义，请检查脚本是否正确加载');
-        return;
-      }
-      
-      if (typeof AiChat.initialize !== 'function') {
-        console.error('AiChat.initialize不是一个函数，实际类型:', typeof AiChat.initialize);
-        console.error('AiChat对象内容:', AiChat);
-        return;
-      }
-      
-      // 初始化聊天组件
-      try {
-        AiChat.initialize('root', {
-          // 这里可以传入配置选项
-        });
-        console.log('聊天组件初始化成功');
-      } catch (error) {
-        console.error('初始化聊天组件时出错:', error);
-      }
-    });
-  </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
+    />
+    <title>AI聊天插件示例</title>
+  </head>
+  <body>
+    <!-- <h1>AI聊天插件示例</h1> -->
+    <div id="root"></div>
+    <!-- <script type="module" src="/src/lib.jsx"></script> -->
+
+    <script>
+      // 等待DOM加载完成
+      document.addEventListener('DOMContentLoaded', function () {
+        // 添加调试代码
+        console.log('AiChat对象:', AiChat);
+
+        // 检查AiChat对象是否正确加载
+        if (typeof AiChat === 'undefined') {
+          console.error('AiChat对象未定义，请检查脚本是否正确加载');
+          return;
+        }
+
+        if (typeof AiChat.initialize !== 'function') {
+          console.error('AiChat.initialize不是一个函数，实际类型:', typeof AiChat.initialize);
+          console.error('AiChat对象内容:', AiChat);
+          return;
+        }
+
+        // 初始化聊天组件
+        try {
+          AiChat.initialize('root', {
+            // 这里可以传入配置选项
+          });
+          console.log('聊天组件初始化成功');
+        } catch (error) {
+          console.error('初始化聊天组件时出错:', error);
+        }
+      });
+    </script>
+  </body>
 </html>

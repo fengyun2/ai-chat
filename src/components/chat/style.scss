@@ -1,4 +1,4 @@
-@import url("../../assets/css/iconfont.css");
+@import url('../../assets/css/iconfont.css');
 
 // 覆盖样式
 :root {
@@ -21,7 +21,6 @@
         color: #fff;
       }
       .Navbar-right {
-        
       }
     }
     .MessageList {
@@ -42,14 +41,14 @@
       width: var(--action-size);
       height: var(--action-size);
       transition: none;
-    
+
       &[data-action='send'] {
         width: var(--action-size);
         height: var(--action-size);
       }
       .IconBtn {
-        padding: 8Px;
-        background: rgba(0,0,0,0.8);
+        padding: 8px;
+        background: rgba(0, 0, 0, 0.8);
         font-size: var(--action-font-size);
         color: #fff;
         border-radius: 8px;
@@ -58,11 +57,11 @@
         }
       }
       .Composer-sendBtn {
-        background: rgba(0,0,0,0.8);
+        background: rgba(0, 0, 0, 0.8);
       }
     }
-    
-    .Composer[data-has-value=true] .Composer-sendBtn {
+
+    .Composer[data-has-value='true'] .Composer-sendBtn {
       animation: none;
     }
   }
@@ -90,21 +89,29 @@
   padding: 0 16px;
   border-radius: 16px 16px 0 0;
   position: relative;
-  
+
   .navbar-title {
-    font-family: Gilroy, Montserrat, avenir, Helvetica Neue, Helvetica, Arial, sans-serif, Microsoft YaHei UI;
+    font-family:
+      Gilroy,
+      Montserrat,
+      avenir,
+      Helvetica Neue,
+      Helvetica,
+      Arial,
+      sans-serif,
+      Microsoft YaHei UI;
     font-weight: bold;
     font-size: 16px;
     text-align: left;
     flex: 1;
   }
-  
+
   .navbar-actions {
     display: flex;
     align-items: center;
     position: absolute;
     right: 16px;
-    
+
     .navbar-btn {
       background: none;
       border: none;
@@ -115,11 +122,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      
+
       &:hover {
         opacity: 0.8;
       }
-      
+
       i {
         font-size: 18px;
       }

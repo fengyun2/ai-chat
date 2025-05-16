@@ -6,9 +6,9 @@ export default {
       browsers: [
         'last 7 years', // 支持2015年至今的浏览器
         'not dead',
-        'ie 11'
+        'ie 11',
       ],
-      autoprefixer: { grid: true }
-    })
-  ]
+      autoprefixer: { grid: true },
+    }),
+  ],
 };

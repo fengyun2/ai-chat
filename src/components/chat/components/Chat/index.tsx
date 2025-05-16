@@ -157,7 +157,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
     onBackBottomClick,
     quickReplies = [],
     quickRepliesVisible,
-    onQuickReplyClick = () => { },
+    onQuickReplyClick = () => {},
     onQuickReplyScroll,
     renderQuickReplies,
     text,
@@ -219,14 +219,14 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
       const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
       const handleColorSchemeChange = (e: MediaQueryListEvent | MediaQueryList) => {
         updateColorScheme(e.matches ? 'dark' : 'light');
-      }
+      };
 
       colorSchemeQuery.addEventListener('change', handleColorSchemeChange);
       handleColorSchemeChange(colorSchemeQuery);
 
       return () => {
         colorSchemeQuery.removeEventListener('change', handleColorSchemeChange);
-      }
+      };
     } else if (colorScheme === 'dark') {
       updateColorScheme(colorScheme);
     }
@@ -234,13 +234,13 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
   }, [colorScheme]);
 
   return (
-    <ConfigProvider locale={locale} locales={locales} colorScheme={currentColorScheme} elderMode={elderMode}>
-      <div
-        className="ChatApp"
-        data-elder-mode={elderMode}
-        data-x={isX}
-        ref={ref}
-      >
+    <ConfigProvider
+      locale={locale}
+      locales={locales}
+      colorScheme={currentColorScheme}
+      elderMode={elderMode}
+    >
+      <div className="ChatApp" data-elder-mode={elderMode} data-x={isX} ref={ref}>
         {renderNavbar ? renderNavbar() : navbar && <Navbar {...navbar} />}
         <MessageContainer
           ref={messagesRef}

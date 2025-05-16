@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useLocale } from '@chatui/core';
-import { IconButton, IconButtonProps } from '../IconButton'
+import { IconButton, IconButtonProps } from '../IconButton';
 
 interface SendButtonProps extends IconButtonProps {
   disabled?: boolean;
@@ -18,7 +18,7 @@ export const SendButton = ({ disabled, onClick, ...restProps }: SendButtonProps)
     if (wrap && btn) {
       wrap.style.setProperty('--send-width', `${btn.offsetWidth}px`);
     }
-  }, [])
+  }, []);
 
   return (
     <div className="Composer-actions" data-action="send" ref={wrapRef}>

@@ -12,7 +12,10 @@ import { ComposerInput } from '@chatui/core/lib/components/Composer/ComposerInpu
 // import { Action } from '@chatui/core/lib/components/Composer/Action';
 import toggleClass from '@chatui/core/lib/utils/toggleClass';
 import { isIOS, isArkWeb } from '@chatui/core/lib/utils/ua';
-import { updateViewportTop, setViewportTop } from '@chatui/core/lib/components/Composer/viewportTop';
+import {
+  updateViewportTop,
+  setViewportTop,
+} from '@chatui/core/lib/components/Composer/viewportTop';
 import { IconButtonProps } from '../IconButton';
 import { SendButton } from './SendButton';
 import { Action } from './Action';
@@ -201,7 +204,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
         onFocus(e);
       }
     },
-    [onFocus],
+    [onFocus]
   );
 
   const handleInputBlur = useCallback(
@@ -219,7 +222,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
         onBlur(e);
       }
     },
-    [onBlur],
+    [onBlur]
   );
 
   const send = useCallback(() => {
@@ -245,7 +248,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
         e.preventDefault();
       }
     },
-    [send],
+    [send]
   );
 
   const handleTextChange = useCallback(
@@ -256,7 +259,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
         onChange(value, e);
       }
     },
-    [onChange],
+    [onChange]
   );
 
   const handleSendBtnClick = useCallback(
@@ -264,7 +267,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
       send();
       e.preventDefault();
     },
-    [send],
+    [send]
   );
 
   const handleAccessoryToggle = useCallback(() => {
@@ -288,7 +291,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
         setAccessoryContent(item.render);
       }
     },
-    [onToolbarClick],
+    [onToolbarClick]
   );
 
   const handlePopoverClose = useCallback(() => {
@@ -315,8 +318,8 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
     return (
       <div className="Composer Composer--lg">
         {hasToolbar &&
-          toolbar.map((item) => (
-            <ToolbarItem item={item} onClick={(e) => handleToolbarClick(item, e)} key={item.type} />
+          toolbar.map(item => (
+            <ToolbarItem item={item} onClick={e => handleToolbarClick(item, e)} key={item.type} />
           ))}
         {accessoryContent && (
           <Popover
@@ -362,7 +365,9 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
             aria-label={isAccessoryOpen ? '关闭工具栏' : '展开工具栏'}
           />
         )}
-        {hasValue && <SendButton {...rightAction} onClick={handleSendBtnClick} disabled={!hasValue} />}
+        {hasValue && (
+          <SendButton {...rightAction} onClick={handleSendBtnClick} disabled={!hasValue} />
+        )}
       </div>
       {isAccessoryOpen && (
         <AccessoryWrap onClickOutside={handleAccessoryBlur}>

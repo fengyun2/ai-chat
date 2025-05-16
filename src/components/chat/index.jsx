@@ -10,37 +10,37 @@ import {
   Input,
   RadioGroup,
   MessageStatus,
-} from "@chatui/core";
+} from '@chatui/core';
 // 引入样式
-import "@chatui/core/dist/index.css";
-import { useState, useRef } from "react";
-import { toast } from "./utils/toast";
-import { Chat } from './components/Chat'
-import { toggleAiChat } from "./utils/mountComponent";
-import "./style.scss";
+import '@chatui/core/dist/index.css';
+import { useState, useRef } from 'react';
+import { toast } from './utils/toast';
+import { Chat } from './components/Chat';
+import { toggleAiChat } from './utils/mountComponent';
+import './style.scss';
 
 // 初始化消息列表，添加欢迎语和常见问题
 const initialMessages = [
   {
-    type: "text",
+    type: 'text',
     content: {
-      text: "您好，我是智能客服助手，很高兴为您服务！有什么可以帮助您的吗？",
+      text: '您好，我是智能客服助手，很高兴为您服务！有什么可以帮助您的吗？',
     },
-    position: "left",
+    position: 'left',
   },
   {
-    type: "text",
-    content: { text: "以下是常见问题，您可以点击或直接提问：" },
-    position: "left",
+    type: 'text',
+    content: { text: '以下是常见问题，您可以点击或直接提问：' },
+    position: 'left',
   },
   {
-    type: "quick-replies",
+    type: 'quick-replies',
     content: {
       items: [
-        { name: "如何退换商品？", text: "如何退换商品？" },
-        { name: "物流配送时间", text: "物流配送时间" },
-        { name: "支付方式有哪些？", text: "支付方式有哪些？" },
-        { name: "如何修改订单？", text: "如何修改订单？" },
+        { name: '如何退换商品？', text: '如何退换商品？' },
+        { name: '物流配送时间', text: '物流配送时间' },
+        { name: '支付方式有哪些？', text: '支付方式有哪些？' },
+        { name: '如何修改订单？', text: '如何修改订单？' },
       ],
     },
   },
@@ -48,19 +48,19 @@ const initialMessages = [
 
 const App = () => {
   const { messages, appendMsg, updateMsg } = useMessages(initialMessages);
-  const [username, setUsername] = useState("");
-  const [sex, setSex] = useState("");
-  const typingMsgId = useRef("");
+  const [username, setUsername] = useState('');
+  const [sex, setSex] = useState('');
+  const typingMsgId = useRef('');
 
   function handleSend(type, val) {
     // 生成唯一ID用于标识消息
-    if (type === "text" && val.trim()) {
+    if (type === 'text' && val.trim()) {
       // 发送消息，初始状态为"发送中"
       typingMsgId.current = appendMsg({
-        type: "text",
+        type: 'text',
         content: { text: val },
-        position: "right",
-        status: "pending", // 设置状态为发送中
+        position: 'right',
+        status: 'pending', // 设置状态为发送中
       });
 
       // 模拟服务器返回不同格式的消息
@@ -71,26 +71,26 @@ const App = () => {
           if (typingMsgId.current) {
             // 更新消息状态为成功
             updateMsg(typingMsgId.current, {
-              type: "text",
+              type: 'text',
               content: { text: val },
-              position: "right",
-              status: "sent", // 更新状态为发送成功
+              position: 'right',
+              status: 'sent', // 更新状态为发送成功
             });
           }
         } else {
           if (typingMsgId.current) {
             // 更新消息状态为失败
             updateMsg(typingMsgId.current, {
-              type: "text",
+              type: 'text',
               content: { text: val },
-              position: "right",
-              status: "fail", // 更新状态为发送失败
+              position: 'right',
+              status: 'fail', // 更新状态为发送失败
             });
           }
         }
 
         // 模拟回答结束
-        typingMsgId.current = "";
+        typingMsgId.current = '';
 
         // HTML 格式消息
         // appendMsg({
@@ -148,50 +148,50 @@ const App = () => {
 
   // 处理消息重发
   function handleResend(msg) {
-    if (msg.status === "failed") {
+    if (msg.status === 'failed') {
       // 删除失败消息
       // 注意：ChatUI没有直接提供删除消息的方法，这里我们通过重新发送来模拟
-      handleSend("text", msg.content.text);
+      handleSend('text', msg.content.text);
 
       // 提示用户
-      toast.info("正在重新发送消息...");
+      toast.info('正在重新发送消息...');
     }
   }
 
   function buyNow() {
-    toast.success("购买成功");
+    toast.success('购买成功');
   }
 
   // 添加表单提交处理函数
   function handleFormSubmit(e) {
     if (e) e.preventDefault();
     if (!username) {
-      toast.error("请输入姓名");
+      toast.error('请输入姓名');
       return;
     }
-    toast.success("提交成功");
+    toast.success('提交成功');
     // 这里可以添加表单提交后的处理逻辑
     appendMsg({
-      type: "text",
+      type: 'text',
       content: { text: `表单提交成功！姓名：${username}，性别：${sex}` },
-      position: "left",
+      position: 'left',
     });
 
     // 清空表单
-    setUsername("");
-    setSex("");
+    setUsername('');
+    setSex('');
   }
 
   // 添加表单取消处理函数
   function handleFormCancel() {
-    setUsername("");
-    setSex("");
-    toast.info("已取消");
+    setUsername('');
+    setSex('');
+    toast.info('已取消');
   }
 
   // 处理快速回复点击
   function handleQuickReplyClick(item) {
-    handleSend("text", item.text);
+    handleSend('text', item.text);
   }
 
   function renderNavbar() {
@@ -202,7 +202,7 @@ const App = () => {
           <button
             className="navbar-btn navbar-btn-expand"
             onClick={() => {
-              console.log("点击了全屏按钮");
+              console.log('点击了全屏按钮');
             }}
           >
             <i className="iconfont icon-arrows-maximize"></i>
@@ -210,7 +210,7 @@ const App = () => {
           <button
             className="navbar-btn"
             onClick={() => {
-              console.log("点击了关闭按钮");
+              console.log('点击了关闭按钮');
               toggleAiChat();
             }}
           >
@@ -228,7 +228,7 @@ const App = () => {
     const MessageWrapper = ({ children }) => {
       return (
         <div className="message-wrapper">
-          {status && status !== "sent" && (
+          {status && status !== 'sent' && (
             <MessageStatus status={status} onClick={() => handleResend(msg)} />
           )}
           {children}
@@ -237,14 +237,14 @@ const App = () => {
     };
 
     switch (type) {
-      case "text":
+      case 'text':
         return (
           <MessageWrapper>
             <Bubble content={content.text} />
           </MessageWrapper>
         );
 
-      case "html":
+      case 'html':
         return (
           <MessageWrapper>
             <Bubble>
@@ -253,11 +253,11 @@ const App = () => {
           </MessageWrapper>
         );
 
-      case "json":
+      case 'json':
         return (
           <MessageWrapper>
             <Bubble>
-              <div style={{ padding: "8px" }}>
+              <div style={{ padding: '8px' }}>
                 <h4>{content.json.title}</h4>
                 <p>价格：{content.json.price}</p>
                 <p>{content.json.description}</p>
@@ -269,42 +269,34 @@ const App = () => {
           </MessageWrapper>
         );
 
-      case "form":
+      case 'form':
         return (
           <MessageWrapper>
             <Bubble>
-              <div style={{ padding: "8px" }}>
+              <div style={{ padding: '8px' }}>
                 {content.form.title && <h4>{content.form.title}</h4>}
                 <Form onSubmit={handleFormSubmit}>
-                  {content.form.fields.map((field) => (
-                    <FormItem
-                      key={field.name}
-                      label={field.label}
-                      required={field.required}
-                    >
-                      {field.type === "text" && (
+                  {content.form.fields.map(field => (
+                    <FormItem key={field.name} label={field.label} required={field.required}>
+                      {field.type === 'text' && (
                         <Input
                           value={
-                            field.name === "username"
-                              ? username
-                              : field.name === "sex"
-                              ? sex
-                              : ""
+                            field.name === 'username' ? username : field.name === 'sex' ? sex : ''
                           }
                           placeholder={`请输入${field.label}`}
                           onChange={
-                            field.name === "username"
+                            field.name === 'username'
                               ? setUsername
-                              : field.name === "sex"
-                              ? setSex
-                              : () => {}
+                              : field.name === 'sex'
+                                ? setSex
+                                : () => {}
                           }
                         />
                       )}
-                      {field.type === "radio-group" && (
+                      {field.type === 'radio-group' && (
                         <RadioGroup
-                          value={field.name === "sex" ? sex : ""}
-                          onChange={field.name === "sex" ? setSex : () => {}}
+                          value={field.name === 'sex' ? sex : ''}
+                          onChange={field.name === 'sex' ? setSex : () => {}}
                           options={field.options || []}
                         />
                       )}
@@ -321,7 +313,7 @@ const App = () => {
             </Bubble>
           </MessageWrapper>
         );
-      case "quick-replies":
+      case 'quick-replies':
         return (
           <div className="quick-replies">
             {content.items.map((item, i) => (
@@ -360,7 +352,7 @@ const App = () => {
         messages={messages}
         renderMessageContent={renderMessageContent}
         onSend={handleSend}
-        rightAction={{iconClassName: 'icon-send'}}
+        rightAction={{ iconClassName: 'icon-send' }}
       />
     </>
   );

@@ -1,10 +1,7 @@
-import ChatComp from './components/chat/index.jsx'
+import ChatComp from './components/chat/index.jsx';
 
 function App() {
-
-  return (
-    <ChatComp />
-  )
+  return <ChatComp />;
 }
 
-export default App
+export default App;

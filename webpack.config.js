@@ -39,25 +39,31 @@ export default {
           loader: 'babel-loader',
           options: {
             presets: [
-              ['@babel/preset-env', {
-                useBuiltIns: 'usage',
-                corejs: '3.36',
-                targets: {
-                  browsers: [
-                    'last 7 years', // 支持2015年至今的浏览器
-                    'not dead',
-                    'ie 11'
-                  ]
-                }
-              }],
-              ['@babel/preset-react', {
-                runtime: 'automatic'
-              }],
-              '@babel/preset-typescript'
+              [
+                '@babel/preset-env',
+                {
+                  useBuiltIns: 'usage',
+                  corejs: '3.36',
+                  targets: {
+                    browsers: [
+                      'last 7 years', // 支持2015年至今的浏览器
+                      'not dead',
+                      'ie 11',
+                    ],
+                  },
+                },
+              ],
+              [
+                '@babel/preset-react',
+                {
+                  runtime: 'automatic',
+                },
+              ],
+              '@babel/preset-typescript',
             ],
-            plugins: []
-          }
-        }
+            plugins: [],
+          },
+        },
       },
       {
         test: /\.css$/,
@@ -68,13 +74,11 @@ export default {
             loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                plugins: [
-                  'postcss-preset-env',
-                ]
-              }
-            }
-          }
-        ]
+                plugins: ['postcss-preset-env'],
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.s[ac]ss$/,
@@ -85,54 +89,56 @@ export default {
             loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                plugins: [
-                  'postcss-preset-env',
-                ]
-              }
-            }
+                plugins: ['postcss-preset-env'],
+              },
+            },
           },
-          'sass-loader'
-        ]
+          'sass-loader',
+        ],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset',
         parser: {
           dataUrlCondition: {
-            maxSize: 1 * 1024 * 1024 // 将所有图片转为 base64
-          }
-        }
+            maxSize: 1 * 1024 * 1024, // 将所有图片转为 base64
+          },
+        },
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: 'asset',
         parser: {
           dataUrlCondition: {
-            maxSize: 1 * 1024 * 1024 // 将所有字体文件转为 base64
-          }
-        }
-      }
-    ]
+            maxSize: 1 * 1024 * 1024, // 将所有字体文件转为 base64
+          },
+        },
+      },
+    ],
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
     alias: {
       '@': path.resolve(__dirname, 'src'),
-    }
+    },
   },
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'ai-chat.css',
     }),
-    new HtmlWebpackPlugin(isDev ? {
-      template: './index.html',
-      filename: 'index.html',
-      inject: false,
-    } :{
-      template: './example.html',
-      filename: 'example.html',
-      inject: false, // 不自动注入资源，我们会在模板中手动引入
-    })
+    new HtmlWebpackPlugin(
+      isDev
+        ? {
+            template: './index.html',
+            filename: 'index.html',
+            inject: true,
+          }
+        : {
+            template: './example.html',
+            filename: 'example.html',
+            inject: false, // 不自动注入资源，我们会在模板中手动引入
+          }
+    ),
   ],
   optimization: {
     minimize: !isDev,

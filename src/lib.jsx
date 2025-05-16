@@ -1,18 +1,18 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import ChatComp from "./components/chat/index.jsx";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import ChatComp from './components/chat/index.jsx';
 // 导入setIframeDocument函数
 import {
   setIframeDocument,
   setIconFrameDocument,
-  setIconIframe
-} from "./components/chat/utils/mountComponent";
+  setIconIframe,
+} from './components/chat/utils/mountComponent';
 
 import iconService from './assets/img/icon-service.png';
 // import './components/chat/style.scss';
 
-const isDev = process.env.NODE_ENV === "development";
-let styles = ''
+const isDev = process.env.NODE_ENV === 'development';
+let styles = '';
 if (isDev) {
   styles = Array.from(document.styleSheets)
     .filter(styleSheet => !styleSheet.href || styleSheet.href.startsWith(window.location.origin))
@@ -46,10 +46,10 @@ if (isDev) {
  */
 function initialize(containerId, options = {}) {
   const {
-    width = "300px",
-    height = "520px",
+    width = '300px',
+    height = '520px',
     // iconSize = "24px",
-    iconContainerSize = "48px",
+    iconContainerSize = '48px',
   } = options;
   const container = document.getElementById(containerId);
   if (!container) {
@@ -58,10 +58,10 @@ function initialize(containerId, options = {}) {
   }
 
   // 创建图标iframe
-  const iconIframe = document.createElement("iframe");
-  iconIframe.className = "ai-chat-icon-frame";
+  const iconIframe = document.createElement('iframe');
+  iconIframe.className = 'ai-chat-icon-frame';
   iconIframe.setAttribute(
-    "style",
+    'style',
     `
     outline: none !important;
     resize: none !important;
@@ -98,8 +98,7 @@ function initialize(containerId, options = {}) {
   setIconIframe(iconIframe);
 
   // 获取图标iframe的document
-  const iconDoc =
-    iconIframe.contentDocument || iconIframe.contentWindow.document;
+  const iconDoc = iconIframe.contentDocument || iconIframe.contentWindow.document;
 
   setIconFrameDocument(iconDoc);
 
@@ -145,17 +144,17 @@ function initialize(containerId, options = {}) {
   `);
   iconDoc.close();
   // 创建样式链接
-  const linkElement = iconDoc.createElement("link");
-  linkElement.rel = "stylesheet";
-  linkElement.href = options.cssPath || "./ai-chat.css";
+  const linkElement = iconDoc.createElement('link');
+  linkElement.rel = 'stylesheet';
+  linkElement.href = options.cssPath || './ai-chat.css';
   iconDoc.head.appendChild(linkElement);
 
   // 创建聊天iframe元素
-  const chatIframe = document.createElement("iframe");
+  const chatIframe = document.createElement('iframe');
 
   // 添加所有需要的样式
   chatIframe.setAttribute(
-    "style",
+    'style',
     `
     outline: none !important;
     visibility: hidden !important; /* 默认隐藏 */
@@ -188,14 +187,13 @@ function initialize(containerId, options = {}) {
   `
   );
 
-  chatIframe.style.scrolling = "no";
+  chatIframe.style.scrolling = 'no';
 
   // 将聊天iframe添加到容器中
   container.appendChild(chatIframe);
 
   // 获取聊天iframe的document
-  const chatDoc =
-    chatIframe.contentDocument || chatIframe.contentWindow.document;
+  const chatDoc = chatIframe.contentDocument || chatIframe.contentWindow.document;
 
   // 设置iframe的document对象，以便mountComponent可以使用
   setIframeDocument(chatDoc);
@@ -256,43 +254,43 @@ function initialize(containerId, options = {}) {
   chatDoc.close();
 
   // 创建样式链接
-  const chatDocLinkElement = chatDoc.createElement("link");
-  chatDocLinkElement.rel = "stylesheet";
-  chatDocLinkElement.href = options.cssPath || "./ai-chat.css";
+  const chatDocLinkElement = chatDoc.createElement('link');
+  chatDocLinkElement.rel = 'stylesheet';
+  chatDocLinkElement.href = options.cssPath || './ai-chat.css';
   chatDoc.head.appendChild(chatDocLinkElement);
 
   // 添加图标库
-  const iconScript = chatDoc.createElement("script");
-  iconScript.src = "//g.alicdn.com/chatui/icons/2.6.2/index.js";
+  const iconScript = chatDoc.createElement('script');
+  iconScript.src = '//g.alicdn.com/chatui/icons/2.6.2/index.js';
   chatDoc.head.appendChild(iconScript);
 
   // 在iframe中渲染React组件
-  const rootDiv = chatDoc.getElementById("ai-chat-root");
+  const rootDiv = chatDoc.getElementById('ai-chat-root');
 
   // 确保DOM已经准备好
   setTimeout(() => {
     try {
       const root = ReactDOM.createRoot(rootDiv);
       root.render(React.createElement(ChatComp, options));
-      console.log("聊天组件在iframe中渲染成功");
+      console.log('聊天组件在iframe中渲染成功');
     } catch (error) {
-      console.error("在iframe中渲染组件时出错:", error);
+      console.error('在iframe中渲染组件时出错:', error);
     }
   }, 100);
 
   // 添加图标点击事件
   let isOpen = false;
-  iconIframe.contentWindow.document.body.addEventListener("click", () => {
+  iconIframe.contentWindow.document.body.addEventListener('click', () => {
     isOpen = !isOpen;
     if (isOpen) {
-      chatIframe.style.visibility = "visible";
+      chatIframe.style.visibility = 'visible';
       // 添加打开动画
-      rootDiv.classList.add("open");
+      rootDiv.classList.add('open');
       // 更改图标样式（可选）
       // iconIframe.contentWindow.document.body.style.transform = "scale(0.9)";
     } else {
-      chatIframe.style.visibility = "hidden";
-      rootDiv.classList.remove("open");
+      chatIframe.style.visibility = 'hidden';
+      rootDiv.classList.remove('open');
       // iconIframe.contentWindow.document.body.style.transform = "scale(1)";
     }
   });
@@ -303,7 +301,7 @@ function initialize(containerId, options = {}) {
       try {
         ReactDOM.unmountComponentAtNode(rootDiv);
       } catch (error) {
-        console.error("卸载组件时出错:", error);
+        console.error('卸载组件时出错:', error);
       }
       container.removeChild(chatIframe);
       container.removeChild(iconIframe);
@@ -332,7 +330,7 @@ const AiChat = {
 };
 
 // 如果是通过script标签加载，则挂载到window对象上
-if (typeof window !== "undefined") {
+if (typeof window !== 'undefined') {
   window.AiChat = AiChat;
 }
 
