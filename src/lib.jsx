@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { LocaleProvider } from '@chatui/core';
 import ChatComp from './components/chat/index.jsx';
 // 导入setIframeDocument函数
 import {
@@ -9,7 +10,9 @@ import {
 } from './components/chat/utils/mountComponent';
 
 import iconService from './assets/img/icon-service.png';
-// import './components/chat/style.scss';
+import defaultLocales from './locales';
+
+const DEFAULT_LOCALE = 'en-US';
 
 const isDev = process.env.NODE_ENV === 'development';
 let styles = '';
@@ -42,6 +45,8 @@ if (isDev) {
  * @param {string} options.title 标题
  * @param {string} options.avatar 头像
  * @param {string} options.welcomeMessage 欢迎语
+ * @param {string} options.locale 语言
+ * @param {Object} options.locales 语言
  * @returns
  */
 function initialize(containerId, options = {}) {
@@ -50,6 +55,8 @@ function initialize(containerId, options = {}) {
     height = '520px',
     // iconSize = "24px",
     iconContainerSize = '48px',
+    locale = 'en-US',
+    locales,
   } = options;
   const container = document.getElementById(containerId);
   if (!container) {
@@ -267,11 +274,20 @@ function initialize(containerId, options = {}) {
   // 在iframe中渲染React组件
   const rootDiv = chatDoc.getElementById('ai-chat-root');
 
+  const defaultStrings = (locale && defaultLocales[locale]) || defaultLocales[DEFAULT_LOCALE];
+  const strings = { ...defaultStrings, ...locales };
   // 确保DOM已经准备好
   setTimeout(() => {
     try {
       const root = ReactDOM.createRoot(rootDiv);
-      root.render(React.createElement(ChatComp, options));
+      root.render(
+        React.createElement(
+          LocaleProvider,
+          { locale: locale, locales: strings },
+          React.createElement(ChatComp, options)
+        )
+      );
+      // root.render(React.createElement(ChatComp, options));
       console.log('聊天组件在iframe中渲染成功');
     } catch (error) {
       console.error('在iframe中渲染组件时出错:', error);

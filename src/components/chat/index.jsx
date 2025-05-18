@@ -10,6 +10,7 @@ import {
   Input,
   RadioGroup,
   MessageStatus,
+  useLocale,
 } from '@chatui/core';
 // 引入样式
 import '@chatui/core/dist/index.css';
@@ -47,6 +48,8 @@ const initialMessages = [
 ];
 
 const App = () => {
+  const { trans } = useLocale();
+  console.log(trans('Home').delete, trans('Home').send, trans('Search').search, ' 多语言测试 ===>');
   const { messages, appendMsg, updateMsg } = useMessages(initialMessages);
   const [username, setUsername] = useState('');
   const [sex, setSex] = useState('');
